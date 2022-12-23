@@ -22,6 +22,37 @@ class LinkedList {
     this.head = new Node(data, this.head);
   }
 
+  // Add a Node as the last Node of the Linked List
+  insertLast(data) {
+    const last = this.getLast();
+
+    // If the Linked List already contains at least one Node
+    if (last) {
+      last.next = new Node(data);
+      // If the Linked List is empty, add a Node as the head
+    } else {
+      this.head = new Node(data);
+    }
+  }
+
+  // Add a Node a the specified index
+  insertAt(data, index) {
+    // If the Linked List is empty, add a Node as the head
+    if (!this.head) {
+      this.insertFirst(data);
+      return;
+    }
+
+    if (index === 0) {
+      this.head = new Node(data, this.head);
+      return;
+    }
+
+    const previous = this.getAt(index - 1) || this.getLast();
+    const node = new Node(data, previous.next);
+    previous.next = node;
+  }
+
   // Return the number of Nodes in the Linked List
   size() {
     let counter = 0;
@@ -54,6 +85,22 @@ class LinkedList {
       }
       node = node.next;
     }
+  }
+
+  // Return the Node at the specified index
+  getAt(index) {
+    let counter = 0;
+    let node = this.head;
+    while (node) {
+      if (counter === index) {
+        return node;
+      }
+
+      counter++;
+      node = node.next;
+    }
+    // If there is no Node at the specified index, return null
+    return null;
   }
 
   // Remove all Nodes from the Linked List
@@ -91,35 +138,6 @@ class LinkedList {
     previous.next = null;
   }
 
-  // Add a Node as the last Node of the Linked List
-  insertLast(data) {
-    const last = this.getLast();
-
-    // If the Linked List already contains at least one Node
-    if (last) {
-      last.next = new Node(data);
-      // If the Linked List is empty, add a Node as the head
-    } else {
-      this.head = new Node(data);
-    }
-  }
-
-  // Return the Node at the specified index
-  getAt(index) {
-    let counter = 0;
-    let node = this.head;
-    while (node) {
-      if (counter === index) {
-        return node;
-      }
-
-      counter++;
-      node = node.next;
-    }
-    // If there is no Node at the specified index, return null
-    return null;
-  }
-
   // Remove the Node at the specified index
   removeAt(index) {
     // If the Linked List is empty, nothing needs to be done
@@ -138,24 +156,6 @@ class LinkedList {
       return;
     }
     previous.next = previous.next.next;
-  }
-
-  // Add a Node a the specified index
-  insertAt(data, index) {
-    // If the Linked List is empty, add a Node as the head
-    if (!this.head) {
-      this.insertFirst(data);
-      return;
-    }
-
-    if (index === 0) {
-      this.head = new Node(data, this.head);
-      return;
-    }
-
-    const previous = this.getAt(index - 1) || this.getLast();
-    const node = new Node(data, previous.next);
-    previous.next = node;
   }
 
   // Perform a function on each Node in the Linked List

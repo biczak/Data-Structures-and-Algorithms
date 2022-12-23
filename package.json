@@ -1,0 +1,13 @@
+{
+  "name": "data-structures-and-algorithms",
+  "version": "0.0.1",
+  "description": "Data Structures and Algorithms in JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "author": "Alex Biczak"
+}
